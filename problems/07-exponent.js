@@ -22,8 +22,40 @@ exponent(5, 5); // 3125
 
 function exponent(b, n) {
   // your code here
+  let res = b;
+  if (n === 0) {
+    return 1;
+  }
+  if (n < 0 ){
+    for (let i = 1 ; i < -n; i++ ){
+      res  *= b;
+    }
+    return 1 / res;
+  } else {
+    for (let i = 1 ; i < n; i++ ){
+      res  *= b;
+    }
+    return res;
+  }
 }
   
+// Alternative solution
+
+/* function exponent(num, power) {
+  // Base case: when power is 0, return 1 (num^0 = 1)
+  if (power === 0) {
+      return 1;
+  }
+  // Recursive case for positive powers
+  else if (power > 0) {
+      return num * exponent(num, power - 1);
+  }
+  // Recursive case for negative powers
+  else {
+      return 1 / (num * exponent(num, (-power) - 1));
+  }
+} */
+
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
   module.exports = exponent;

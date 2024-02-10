@@ -23,6 +23,21 @@ sort([]); // []
 
 function sort(nums, sorted = []) {
   // your code here
+  if (nums.length === 0) {
+    return sorted;
+  }
+
+  // Find the index of the smallest element in nums
+  const smallestIndex = nums.indexOf(Math.min(...nums));
+
+  // Add the smallest element to the end of sorted
+  sorted.push(nums[smallestIndex]);
+
+  // Remove the smallest element from nums
+  nums.splice(smallestIndex, 1);
+
+  // Recursively call sort with the updated nums and sorted arrays
+  return sort(nums, sorted);
 }
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/

@@ -56,10 +56,54 @@ combinations.
 function greedyMakeChange(target, coins = [25, 10, 5, 1]) {
   // no tests for greedyMakeChange so make sure to test this on your own
   // your code here
+  let change = [];
+    let remainingAmount = targetAmount;
+
+    // Ensure coins are sorted in descending order
+    coins.sort((a, b) => b - a);
+
+    for (let i = 0; i < coins.length; i++) {
+        let coin = coins[i];
+        while (remainingAmount - coin >= 0) {
+            change.push(coin);
+            remainingAmount -= coin;
+        }
+    }
+
+    return change;
 }
 
 function makeBetterChange(target, coins = [25, 10, 5, 1]) {
   // your code here
+  // Base case: exact change matched
+  if (target === 0) return [];
+  // No solution if coins cannot cover the targetAmount or targetAmount is negative
+  if (!coins.length || target < 0) return null;
+
+  // Sort coins in descending order to start with the largest denomination
+  coins.sort((a, b) => b - a);
+
+  let bestChange = null;
+
+  for (let i = 0; i < coins.length; i++) {
+      if (coins[i] > target) continue; // Skip coins that exceed targetAmount
+
+      // Use one coin of the current denomination and make recursive call for the remainder
+      const remainder = target - coins[i];
+      const remainderChange = makeBetterChange(remainder, coins.slice(i));
+
+      if (remainderChange !== null) {
+          // Valid combination found, add current coin to it
+          const currentChange = [coins[i], ...remainderChange];
+
+          // If it's the first combination found or better than the previous best, update bestChange
+          if (bestChange === null || currentChange.length < bestChange.length) {
+              bestChange = currentChange;
+          }
+      }
+  }
+
+  return bestChange;
 }
 
 

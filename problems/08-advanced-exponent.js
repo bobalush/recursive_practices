@@ -42,7 +42,31 @@ times `advancedExponent` is being recursively called.
 
 function advancedExponent(b, n) {
   // your code here
+
+  
+    if (n === 0) {
+        return 1;
+    }
+    if (n === 1) {
+        return b;
+    }
+    if (n < 0) {
+        // Handle negative exponents
+        return 1 / advancedExponent(b, -n);
+    }
+
+    // Compute exponent for n / 2 and square the result
+    let halfExponent = advancedExponent(b, Math.floor(n / 2));
+    let result = halfExponent * halfExponent;
+
+    // If n is odd, multiply by b one more time
+    if (n % 2 === 1) {
+        result *= b;
+    }
+
+    return result;
 }
+
 
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/

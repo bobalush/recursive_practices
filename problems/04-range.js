@@ -9,7 +9,17 @@ range(1, 5); // [1, 2, 3, 4]
 range(3, 4); // [3]
 range(7, 6); // []
 ***********************************************************************/
+function range(start, end) {
+  if (start > end) {
+    return [];
+  }
 
+  if (start === end - 1) {
+    return [start];
+  }
+
+  return [start].concat(range(start + 1, end));
+}
 
 // your code here
 

@@ -38,6 +38,23 @@ console.log(x[0] === y[0]) // true
 
 // your code here
 
+function deepDup(arr) {
+  // create a new array to hold the deep duplication
+  let duped = [];
+
+  // Iterate through each element in the orifinal array
+   arr.forEach(element => {
+    // If the element is an empty array, recursively deep duplicate it
+    if(Array.isArray(element)) {
+      duped.push(deepDup(element));
+    } else {
+      // If the element is not an array, directly add it to the duped array
+      duped.push(element);
+    }
+  });
+ return duped;
+}
+
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
   module.exports = deepDup;
